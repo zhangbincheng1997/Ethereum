@@ -1,0 +1,1 @@
+geth --identity "HDetherum" --rpc --rpccorsdomain "*" --datadir "%cd%\chain" --port "30303" --rpcapi "db,eth,net,web3" --networkid 95520 console
