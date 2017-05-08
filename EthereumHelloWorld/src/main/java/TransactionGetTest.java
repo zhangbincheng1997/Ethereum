@@ -15,11 +15,10 @@ import org.web3j.protocol.http.HttpService;
 
 /**
  * @author littleredhat
- * 
- *         HelloWorld之get函数
+ * @description HelloWorld之get函数
  */
 public class TransactionGetTest {
-
+	// HelloWorld智能合约地址
 	private static String toAddress = "0x5a4dc569C7B395130c58A9B0C183fEf6c4957AA9";
 
 	public static void main(String[] args) throws Exception {

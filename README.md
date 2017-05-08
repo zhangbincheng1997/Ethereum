@@ -1,7 +1,7 @@
 # 以太坊开发
 
 ## Geth以太坊客户端
-1、下载地址https://geth.ethereum.org/downloads/，貌似我打不开的样子？  
+1、下载地址https://geth.ethereum.org/downloads/ 貌似我打不开的样子？  
 2、打开CMD，切换到Geth文件夹下：  
 ```
 cd path...
@@ -15,7 +15,7 @@ init
 datadir
 # 设置当前区块链网络数据存放的位置
 ```
-4、启动Geth，PS：方便起见可将命令放在startup.bat脚本，以后只要双击这个脚本就好了。  
+4、启动Geth，PS：可将命令放在startup.bat脚本，只要双击脚本即可启动。  
 ```
 geth --identity "HDetherum" --rpc --rpccorsdomain "*" --datadir "%cd%\chain" --port "30303" --rpcapi "db,eth,net,web3" --networkid 95520 console
 
@@ -34,9 +34,9 @@ console
 ```
 
 ## Ethereum Wallet钱包客户端
-1、下载地址https://github.com/ethereum/mist/releases/  
-2、在Wallets处创建账号，默认第一个创建的为主账号，挖矿所得都将进入这个账号，其余为普通账号，可以用来测试。  
-3、在Contracts处发布智能合约，输入代码，点击部署：  
+1、下载地址https://github.com/ethereum/mist/releases/ 找到对应版本下载。  
+2、在Wallets处创建账号，默认首个创建为主账号，挖矿所得的以太币都将进入这个账号，其余为普通账号，可以用来测试。  
+3、在Contracts处发布智能合约，输入HelloWorld.sol代码，点击部署：  
 ```
 pragma solidity 0.4.8;
 
@@ -73,8 +73,8 @@ miner.stop()
 	</dependency>
 </dependencies>
 ```
-3、右键工程、点击Maven、选择Update Project。由于Web3j依赖较多，所以下载时间会比较久。  
-4、具体用法可以参考项目代码，另外还可以参考Web3j官方文档https://web3j.github.io/web3j/。  
+3、右键工程、点击Maven、选择Update Project。  
+4、具体用法可以参考项目代码，另外还可以参考Web3j官方文档https://web3j.github.io/web3j/ 内容十分详细。  
 
 附：  
 存在问题：项目可能提示JDK Level不是1.8  
