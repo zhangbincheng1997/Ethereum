@@ -1,3 +1,5 @@
+package com.redhat.sample;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +19,7 @@ import org.web3j.protocol.http.HttpService;
  * @author littleredhat
  * @description HelloWorld之get函数
  */
-public class TransactionGetTest {
+public class TransactionGetSample {
 	// HelloWorld智能合约地址
 	private static String toAddress = "0x5a4dc569C7B395130c58A9B0C183fEf6c4957AA9";
 
@@ -31,13 +33,14 @@ public class TransactionGetTest {
 		 * List<TypeReference<?>> outputParameters 出口参数
 		 */
 		Function function = new Function("get", Arrays.asList(),
-				Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+				Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+				}));
 
 		// encode the function
 		String encodedFunction = FunctionEncoder.encode(function);
 
 		/*
-		 * eth_call allows you to call a method on a smart contract to query a value.
+		 * eth_call allows you to call a method on a smart contract to query a value. 
 		 * There is no transaction cost associated with this function,
 		 * this is because it does not change the state of any smart contract method’s called,
 		 * it simply returns the value from them.
@@ -48,7 +51,6 @@ public class TransactionGetTest {
 		// get result
 		List<Type> result = FunctionReturnDecoder.decode(response.getValue(), function.getOutputParameters());
 		int retVal = Integer.parseInt(result.get(0).getValue().toString());
-
 		System.out.println("retVal = " + retVal);
 	}
 }

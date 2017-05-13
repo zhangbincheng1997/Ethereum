@@ -1,3 +1,5 @@
+package com.redhat.sample;
+
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 import org.web3j.protocol.http.HttpService;
@@ -6,7 +8,7 @@ import org.web3j.protocol.http.HttpService;
  * @author littleredhat
  * @description ªÒ»°∞Ê±æ
  */
-public class VersionTest {
+public class ClientVersionSample {
 
 	public static void main(String[] args) throws Exception {
 		// defaults to http://localhost:8545/
