@@ -24,7 +24,6 @@ import org.web3j.utils.Numeric;
 
 /**
  * @author littleredhat
- * @description HelloWorldÖ®Filter
  */
 public class FilterSample {
 	// Ç®°üÃÜÂë

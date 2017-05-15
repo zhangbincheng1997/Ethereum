@@ -20,7 +20,6 @@ import org.web3j.utils.Numeric;
 
 /**
  * @author littleredhat
- * @description HelloWorldÖ®setº¯Êı
  */
 public class TransactionSetSample {
 	// Ç®°üÃÜÂë

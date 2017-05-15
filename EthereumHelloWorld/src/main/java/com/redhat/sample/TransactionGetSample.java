@@ -17,7 +17,6 @@ import org.web3j.protocol.http.HttpService;
 
 /**
  * @author littleredhat
- * @description HelloWorld之get函数
  */
 public class TransactionGetSample {
 	// HelloWorld智能合约地址
@@ -33,8 +32,7 @@ public class TransactionGetSample {
 		 * List<TypeReference<?>> outputParameters 出口参数
 		 */
 		Function function = new Function("get", Arrays.asList(),
-				Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
-				}));
+				Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
 
 		// encode the function
 		String encodedFunction = FunctionEncoder.encode(function);

@@ -6,7 +6,6 @@ import org.web3j.protocol.http.HttpService;
 
 /**
  * @author littleredhat
- * @description ªÒ»°∞Ê±æ
  */
 public class ClientVersionSample {
 

@@ -11,7 +11,6 @@ import org.web3j.utils.Convert;
 
 /**
  * @author littleredhat
- * @description 转账事务
  */
 public class TransferEthSample {
 	// 钱包密码

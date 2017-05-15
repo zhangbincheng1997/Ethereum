@@ -6,7 +6,6 @@ import org.web3j.crypto.WalletUtils;
 
 /**
  * @author littleredhat
- * @description 创建钱包
  */
 public class GenerateWalletSample {
 	// 钱包密码

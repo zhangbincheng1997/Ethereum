@@ -1,9 +1,9 @@
-pragma solidity 0.4.8;
+ï»¿pragma solidity 0.4.8;
 
 contract TransferContract {
-    // ÊÂ¼þ
+	// äº‹ä»¶
     event Transfer(address indexed from, address indexed to, uint value);
-    // º¯Êý
+	// å‡½æ•°
     function TransferFunc(address from, address to, uint value) {
         Transfer(from, to, value);
     }

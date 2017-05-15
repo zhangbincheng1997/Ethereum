@@ -12,7 +12,6 @@ import org.web3j.protocol.http.HttpService;
 
 /**
  * @author littleredhat
- * @description 通过使用HelloWorldContract完成以太坊事务
  */
 public class HelloWorldSample {
 	// 钱包密码
