@@ -10,20 +10,12 @@ import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
 
+import com.redhat.util.Consts;
+
 /**
  * @author littleredhat
  */
 public class HelloWorldSample {
-	// 钱包密码
-	private static String password = "123456";
-	// 钱包路径
-	private static String path = "F:\\chain\\geth-win64\\chain\\keystore\\UTC--2017-05-03T17-48-46.721084800Z--6c97ea3f4f71669412aab8b7f705e253ce14064c";
-	// HelloWorld智能合约地址
-	private static String toAddress = "0x5a4dc569C7B395130c58A9B0C183fEf6c4957AA9";
-	// Gas价格
-	private static int gasPrice = 1200000;
-	// Gas上限
-	private static int gasLimit = 2000000;
 	// contract instantiation
 	private static HelloWorldContract contract;
 
@@ -32,11 +24,11 @@ public class HelloWorldSample {
 		Web3j web3j = Web3j.build(new HttpService());
 
 		// load the credentials
-		Credentials credentials = WalletUtils.loadCredentials(password, path);
+		Credentials credentials = WalletUtils.loadCredentials(Consts.PASSWORD, Consts.PATH);
 
 		// Solidity contract type abstraction for interacting with smart contracts via native Java types.
-		contract = new HelloWorldContract(toAddress, web3j, credentials, BigInteger.valueOf(gasPrice),
-				BigInteger.valueOf(gasLimit));
+		contract = new HelloWorldContract(Consts.HELLOWORLD_CONTRACT_ADDRESS, web3j, credentials,
+				BigInteger.valueOf(Consts.GAS_PRICE), BigInteger.valueOf(Consts.GAS_LIMIT));
 
 		// set
 		Future<TransactionReceipt> transferReceipt = contract.set(10000);
