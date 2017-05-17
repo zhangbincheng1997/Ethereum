@@ -1,4 +1,4 @@
-package com.redhat.contract;
+package com.redhat.helloworld.sample;
 
 import java.util.concurrent.Future;
 
@@ -6,8 +6,8 @@ import org.web3j.abi.datatypes.generated.Uint256;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
-import com.redhat.util.Consts;
-import com.redhat.util.Util;
+import com.redhat.helloworld.util.Consts;
+import com.redhat.helloworld.util.Util;
 
 /**
  * @author littleredhat

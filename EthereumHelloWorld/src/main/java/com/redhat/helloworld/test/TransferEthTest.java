@@ -1,4 +1,4 @@
-package com.redhat.sample;
+package com.redhat.helloworld.test;
 
 import java.math.BigDecimal;
 
@@ -9,17 +9,15 @@ import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.Transfer;
 import org.web3j.utils.Convert;
 
+import com.redhat.helloworld.util.Consts;
+
 /**
  * @author littleredhat
  */
-public class TransferEthSample {
-	// 钱包密码
-	private static String password = "123456";
-	// 钱包路径
-	private static String path = "F:\\chain\\geth-win64\\chain\\keystore\\UTC--2017-05-03T17-48-46.721084800Z--6c97ea3f4f71669412aab8b7f705e253ce14064c";
+public class TransferEthTest {
 	// 对方地址
 	private static String toAddress = "0x6c079ade6a7f4c74eebd85c272d2b3930f1224a4";
-	//
+	// 金币数量
 	private static double value = 100;
 
 	public static void main(String[] args) throws Exception {
@@ -27,7 +25,7 @@ public class TransferEthSample {
 		Web3j web3 = Web3j.build(new HttpService());
 
 		// To send Ether to another party using your Ethereum wallet file
-		Credentials credentials = WalletUtils.loadCredentials(password, path);
+		Credentials credentials = WalletUtils.loadCredentials(Consts.PASSWORD, Consts.PATH);
 		Transfer.sendFunds(web3, credentials, toAddress, BigDecimal.valueOf(value), Convert.Unit.ETHER);
 	}
 }

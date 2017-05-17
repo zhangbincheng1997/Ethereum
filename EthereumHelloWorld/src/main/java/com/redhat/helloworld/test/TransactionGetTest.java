@@ -1,4 +1,4 @@
-package com.redhat.sample;
+package com.redhat.helloworld.test;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,36 +15,38 @@ import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthCall;
 import org.web3j.protocol.http.HttpService;
 
+import com.redhat.helloworld.util.Consts;
+
 /**
  * @author littleredhat
  */
-public class TransactionGetSample {
-	// HelloWorld智能合约地址
-	private static String toAddress = "0x5a4dc569C7B395130c58A9B0C183fEf6c4957AA9";
+public class TransactionGetTest {
 
 	public static void main(String[] args) throws Exception {
 		// defaults to http://localhost:8545/
 		Web3j web3j = Web3j.build(new HttpService());
 
 		/*
-		 * String name 函数名字
-		 * List<Type> inputParameters 入口参数
+		 * String name 函数名字 List<Type> inputParameters 入口参数
 		 * List<TypeReference<?>> outputParameters 出口参数
 		 */
 		Function function = new Function("get", Arrays.asList(),
-				Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+				Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+				}));
 
 		// encode the function
 		String encodedFunction = FunctionEncoder.encode(function);
 
 		/*
-		 * eth_call allows you to call a method on a smart contract to query a value. 
+		 * eth_call allows you to call a method on a smart contract to query a value.
 		 * There is no transaction cost associated with this function,
 		 * this is because it does not change the state of any smart contract method’s called,
 		 * it simply returns the value from them.
 		 */
-		EthCall response = web3j.ethCall(Transaction.createEthCallTransaction(toAddress, encodedFunction),
-				DefaultBlockParameterName.LATEST).sendAsync().get();
+		EthCall response = web3j
+				.ethCall(Transaction.createEthCallTransaction(Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction),
+						DefaultBlockParameterName.LATEST)
+				.sendAsync().get();
 
 		// get result
 		List<Type> result = FunctionReturnDecoder.decode(response.getValue(), function.getOutputParameters());

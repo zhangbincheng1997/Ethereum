@@ -1,4 +1,4 @@
-package com.redhat.util;
+package com.redhat.helloworld.util;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -9,7 +9,7 @@ import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
 
-import com.redhat.contract.HelloWorldContract;
+import com.redhat.helloworld.sample.HelloWorldContract;
 
 /**
  * @author littleredhat

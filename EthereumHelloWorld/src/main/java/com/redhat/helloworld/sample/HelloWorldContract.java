@@ -1,4 +1,4 @@
-package com.redhat.contract;
+package com.redhat.helloworld.sample;
 
 import java.math.BigInteger;
 import java.util.Arrays;

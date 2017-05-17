@@ -1,4 +1,4 @@
-package com.redhat.util;
+package com.redhat.helloworld.util;
 
 /**
  * @author littleredhat
@@ -8,6 +8,8 @@ public class Consts {
 	public static String PASSWORD = "123456";
 	// 钱包路径
 	public static String PATH = "F:\\chain\\geth-win64\\chain\\keystore\\UTC--2017-05-03T17-48-46.721084800Z--6c97ea3f4f71669412aab8b7f705e253ce14064c";
+	// 钱包目录
+	public static String DIRECTORY = "F:\\chain\\geth-win64\\chain\\keystore";
 	// HelloWorld智能合约地址
 	public static String HELLOWORLD_CONTRACT_ADDRESS = "0x5a4dc569C7B395130c58A9B0C183fEf6c4957AA9";
 	// Gas价格

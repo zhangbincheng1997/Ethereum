@@ -1,4 +1,4 @@
-package com.redhat.sample;
+package com.redhat.helloworld.test;
 
 import java.math.BigInteger;
 import java.time.Instant;
@@ -22,20 +22,12 @@ import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Numeric;
 
+import com.redhat.helloworld.util.Consts;
+
 /**
  * @author littleredhat
  */
-public class FilterSample {
-	// 钱包密码
-	private static String password = "123456";
-	// 钱包路径
-	private static String path = "F:\\chain\\geth-win64\\chain\\keystore\\UTC--2017-05-03T17-48-46.721084800Z--6c97ea3f4f71669412aab8b7f705e253ce14064c";
-	// HelloWorld智能合约地址
-	private static String toAddress = "0x5a4dc569C7B395130c58A9B0C183fEf6c4957AA9";
-	// Gas价格
-	private static int gasPrice = 1200000;
-	// Gas上限
-	private static int gasLimit = 2000000;
+public class FilterTest {
 	// 区块数量
 	private static int blockNumber = 0;
 	// 事务数量
@@ -77,7 +69,7 @@ public class FilterSample {
 
 	private static void Transaction() throws Exception {
 		// load the credentials
-		Credentials credentials = WalletUtils.loadCredentials(password, path);
+		Credentials credentials = WalletUtils.loadCredentials(Consts.PASSWORD, Consts.PATH);
 
 		// get the next available nonce
 		EthGetTransactionCount ethGetTransactionCount = web3j
@@ -99,11 +91,10 @@ public class FilterSample {
 		 * BigInteger nonce 随机数字
 		 * BigInteger gasPrice 价格
 		 * BigInteger gasLimit 上限
-		 * String to 合约地址
-		 * String data 编码函数
+		 * String to 合约地址 String data 编码函数
 		 */
-		RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, BigInteger.valueOf(gasPrice),
-				BigInteger.valueOf(gasLimit), toAddress, encodedFunction);
+		RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, BigInteger.valueOf(Consts.GAS_PRICE),
+				BigInteger.valueOf(Consts.GAS_LIMIT), Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction);
 		// sign our transaction
 		byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
 		String hexValue = Numeric.toHexString(signedMessage);
