@@ -36,7 +36,7 @@ console
 ## Ethereum Wallet钱包客户端
 1、下载地址https://github.com/ethereum/mist/releases/ 找到对应版本下载。  
 2、在Wallets处创建账号，默认首个创建为主账号，挖矿所得的以太币都将进入这个账号，其余为普通账号，可以用来测试。  
-3、在Contracts处发布智能合约，输入HelloWorld.sol和TransferContract.sol代码，点击部署。  
+3、在Contracts处发布智能合约，输入HelloWorld.sol代码，点击部署。  
 4、这个时候看不到部署的智能合约，需要切换到Geth进行挖矿，挖到一定数量的矿之后，智能合约才能确认并且显示出来：  
 ```
 miner.start(1)
