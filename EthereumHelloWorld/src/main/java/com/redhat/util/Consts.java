@@ -1,7 +1,5 @@
 package com.redhat.util;
 
-import java.math.BigInteger;
-
 /**
  * @author littleredhat
  */
@@ -16,6 +14,4 @@ public class Consts {
 	public static int GAS_PRICE = 1200000;
 	// Gas…œœﬁ
 	public static int GAS_LIMIT = 2000000;
-	// ETHER
-	public static BigInteger ETHER = new BigInteger("1000000000000000000");
 }
