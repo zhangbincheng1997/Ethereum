@@ -1,4 +1,4 @@
-package com.redhat.helloworld.sample;
+package com.redhat.helloworld.contract;
 
 import java.util.concurrent.Future;
 
@@ -12,17 +12,15 @@ import com.redhat.helloworld.util.Util;
 /**
  * @author littleredhat
  */
-public class HelloWorldSample {
-	// contract instantiation
-	private static HelloWorldContract contract;
+public class HelloWorldTest {
 
 	public static void main(String[] args) throws Exception {
-		// 获取管理员凭证
+		// 获取凭证
 		Credentials credentials = Util.GetCredentials();
-		if (credentials == null)
-			System.exit(0);
+		System.out.println("contractAddress : " + credentials.getAddress());
+
 		// 获取合约
-		contract = Util.GetHelloWorldContract(credentials, Consts.HELLOWORLD_CONTRACT_ADDRESS);
+		HelloWorldContract contract = Util.GetHelloWorldContract(credentials, Consts.HELLOWORLD_CONTRACT_ADDRESS);
 		System.out.println("contractAddress : " + contract.getContractAddress());
 
 		// set

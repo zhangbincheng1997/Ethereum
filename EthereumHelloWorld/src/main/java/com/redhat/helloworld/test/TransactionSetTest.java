@@ -52,10 +52,11 @@ public class TransactionSetTest {
 		 * BigInteger nonce 随机数字
 		 * BigInteger gasPrice 价格
 		 * BigInteger gasLimit 上限
-		 * String to 合约地址 String data 编码函数
+		 * String to 合约地址
+		 * String data 编码函数
 		 */
-		RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, BigInteger.valueOf(Consts.GAS_PRICE),
-				BigInteger.valueOf(Consts.GAS_LIMIT), Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction);
+		RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, Consts.GAS_PRICE, Consts.GAS_LIMIT,
+				Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction);
 
 		// sign our transaction
 		byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);

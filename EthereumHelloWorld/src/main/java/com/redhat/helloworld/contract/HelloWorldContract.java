@@ -1,4 +1,4 @@
-package com.redhat.helloworld.sample;
+package com.redhat.helloworld.contract;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -33,7 +33,7 @@ public class HelloWorldContract extends Contract implements HelloWorldInterface 
 	 */
 	public HelloWorldContract(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice,
 			BigInteger gasLimit) {
-		super(contractAddress, web3j, credentials, gasPrice, gasLimit);
+		super("", contractAddress, web3j, credentials, gasPrice, gasLimit);
 	}
 
 	public Future<Uint256> get() {

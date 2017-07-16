@@ -26,6 +26,8 @@ public class TransferEthTest {
 
 		// To send Ether to another party using your Ethereum wallet file
 		Credentials credentials = WalletUtils.loadCredentials(Consts.PASSWORD, Consts.PATH);
+
+		// Web3j web3j, Credentials credentials, String toAddress, BigDecimal value, Convert.Unit unit
 		Transfer.sendFunds(web3, credentials, toAddress, BigDecimal.valueOf(value), Convert.Unit.ETHER);
 	}
 }

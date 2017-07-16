@@ -32,8 +32,6 @@ public class FilterTest {
 	private static int blockNumber = 0;
 	// 事务数量
 	private static int transactionNumber = 0;
-	// defaults to http://localhost:8545/
-	private static Web3j web3j = Web3j.build(new HttpService());
 
 	public static void main(String[] args) throws Exception {
 		/***** 开始监听 *****/
@@ -46,28 +44,40 @@ public class FilterTest {
 
 	// To receive all new blocks as they are added to the blockchain
 	private static void BlockFilters() {
+		// defaults to http://localhost:8545/
+		Web3j web3j = Web3j.build(new HttpService());
+
 		web3j.blockObservable(false).subscribe(block -> {
 			System.out.println("新区块 : " + ++blockNumber);
 			LocalDateTime timestamp = Instant.ofEpochSecond(block.getBlock().getTimestamp().longValueExact())
 					.atZone(ZoneId.of("UTC")).toLocalDateTime();
 			System.out.println("timestamp : " + timestamp);
-			System.out.println("transactionCount : " + block.getBlock().getTransactions().size());
 			System.out.println("hash : " + block.getBlock().getHash());
-			System.out.println("parentHash : " + block.getBlock().getParentHash());
+			System.out.println("getParentHash : " + block.getBlock().getParentHash());
+			int count = block.getBlock().getTransactions().size();
+			for (int i = 0; i < count; i++) {
+				Object tx = block.getBlock().getTransactions().get(i).get();
+				System.out.println("[ " + i + " ]" + " getTransaction : " + tx);
+			}
 		});
 	}
 
 	// To receive all new transactions as they are added to the blockchain
 	private static void TransactionFilters() {
+		// defaults to http://localhost:8545/
+		Web3j web3j = Web3j.build(new HttpService());
+
 		web3j.transactionObservable().subscribe(tx -> {
 			System.out.println("新事务 : " + ++transactionNumber);
-			System.out.println("getInput : " + tx.getInput());
-			System.out.println("getFrom : " + tx.getFrom());
-			System.out.println("getTo : " + tx.getTo());
+			System.out.println("getHash: " + tx.getHash());
+			System.out.println("getBlockHash: " + tx.getBlockHash());
 		});
 	}
 
 	private static void Transaction() throws Exception {
+		// defaults to http://localhost:8545/
+		Web3j web3j = Web3j.build(new HttpService());
+
 		// load the credentials
 		Credentials credentials = WalletUtils.loadCredentials(Consts.PASSWORD, Consts.PATH);
 
@@ -91,10 +101,11 @@ public class FilterTest {
 		 * BigInteger nonce 随机数字
 		 * BigInteger gasPrice 价格
 		 * BigInteger gasLimit 上限
-		 * String to 合约地址 String data 编码函数
+		 * String to 合约地址
+		 * String data 编码函数
 		 */
-		RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, BigInteger.valueOf(Consts.GAS_PRICE),
-				BigInteger.valueOf(Consts.GAS_LIMIT), Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction);
+		RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, Consts.GAS_PRICE, Consts.GAS_LIMIT,
+				Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction);
 		// sign our transaction
 		byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
 		String hexValue = Numeric.toHexString(signedMessage);

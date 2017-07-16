@@ -1,43 +1,40 @@
 # 以太坊开发
 
 ## Geth以太坊客户端
-1、下载地址https://geth.ethereum.org/downloads/ 貌似我打不开的样子？  
-2、打开CMD，切换到Geth文件夹下：  
+> * 1、下载地址https://geth.ethereum.org/downloads/ 貌似我打不开的样子？
+> * 2、将创世块文件genesis.json复制到到Geth文件夹下。
+> * 3、第一次启动Geth，需要初始化创世块：
 ```
-cd path...
+geth -datadir "%cd%\chain" init genesis.json
 ```
-3、如果是第一次启动Geth，需要初始化创世块：  
-```
-geth --datadir "%cd%\chain" init hdgenesis.json
 
-init
-# 指定创世块文件的位置，并创建初始块
-datadir
-# 设置当前区块链网络数据存放的位置
+> * 4、启动Geth，可将命令放在startup.bat脚本，双击脚本启动：
 ```
-4、启动Geth，PS：可将命令放在startup.bat脚本，只要双击脚本即可启动。  
-```
-geth --identity "HDetherum" --rpc --rpccorsdomain "*" --datadir "%cd%\chain" --port "30303" --rpcapi "db,eth,net,web3" --networkid 95520 console
+geth --identity "ethnode" --rpc --rpccorsdomain "*" --datadir "%cd%\chain" --port "30303" --rpcapi "db,eth,net,web3" --networkid 666666 console
 
 identity
-# 区块链的标示，随便填写，用于标示目前网络的名字
+# 区块链标识
 rpc
-# 启动rpc通信，可以进行智能合约的部署和调试
+# rpc启动通信
+rpccorsdomain
+# rpc跨源请求
+datadir
+# 区块链数据位置
 port
-# 网络监听端口
+# 监听端口
 rpcapi
-# 设置允许连接的rpc的客户端，一般为db,eth,net,web3
+# 允许接口
 networkid
-# 设置当前区块链的网络ID，用于区分不同的网络，是一个数字
+# 区块链ID
 console
-# 启动命令行模式，可以在Geth中执行命令
+# 命令行模式
 ```
 
 ## Ethereum Wallet钱包客户端
-1、下载地址https://github.com/ethereum/mist/releases/ 找到对应版本下载。  
-2、在Wallets处创建账号，默认首个创建为主账号，挖矿所得的以太币都将进入这个账号，其余为普通账号，可以用来测试。  
-3、在Contracts处发布智能合约，输入HelloWorld.sol代码，点击部署。  
-4、这个时候看不到部署的智能合约，需要切换到Geth进行挖矿，挖到一定数量的矿之后，智能合约才能确认并且显示出来：  
+> * 1、下载地址https://github.com/ethereum/mist/releases/ 找到对应版本下载。
+> * 2、在Wallets处创建账号，默认首个创建为主账号，挖矿所得的以太币都将进入这个账号，其余为普通账号，可以用来测试。
+> * 3、在Contracts处发布智能合约，输入HelloWorld.sol代码，点击部署。
+4、这个时候看不到部署的智能合约，需要切换到Geth进行挖矿，挖到一定数量的矿之后，智能合约才能确认并且显示出来：
 ```
 miner.start(1)
 # 开启一个线程挖矿，多线程会很卡
@@ -46,20 +43,36 @@ miner.stop()
 ```
 
 ## Web3j 轻量级的以太坊开发库for Java
-1、创建Maven工程，不懂自行百度。   
-2、打开pom.xml，添加Web3j依赖：  
+> * 1、Maven依赖
 ```
-<dependencies>
-	<dependency>
-		<groupId>org.web3j</groupId>
-		<artifactId>core</artifactId>
-		<version>2.1.0</version>
-	</dependency>
-</dependencies>
+<dependency>
+	<groupId>org.web3j</groupId>
+	<artifactId>core</artifactId>
+	<version>2.2.2</version>
+</dependency>
 ```
-3、右键工程、点击Maven、选择Update Project。  
-4、具体用法可以参考项目代码，另外还可以参考Web3j官方文档https://web3j.github.io/web3j/ 内容十分详细。  
 
-附：  
-存在问题：项目可能提示JDK Level不是1.8  
-解决办法：右键工程、点击Properties，选择Java Compiler、取消Enable project specific settings、点击OK。
+> * 2、代码说明
+```
+--com.redhat.helloworld.util
+----Consts.java 常量类 需要修改PASSWORD、PATH和HELLOWORLD_CONTRACT_ADDRESS
+----Util.java 工具类
+
+--com.redhat.helloworld.test
+----ClientVersionTest.java 客户端版本
+----GenerateWalletTest.java 生成钱包
+----TransferEthTest.java 转账
+----TransactionGetTest.java Web3j原生调用HelloWorld合约的get方法
+----TransactionSetTest.java Web3j原生调用HelloWorld合约的set方法
+----FilterTest.java 过滤器
+
+--com.redhat.helloworld.contract
+----HelloWorldInterface.java HelloWorld合约接口
+----HelloWorldContract.java HelloWorld合约实现 继承Web3j提供的Contract类
+----HelloWorldTest.java HelloWorld合约测试
+```
+
+> * 3、具体用法
+可以参考项目代码，另外还可以参考Web3j官方文档https://web3j.github.io/web3j/ 内容十分详细。
+> * 4、其他问题
+项目提示JDK Level不是1.8 => Project->Properties->Java Compiler->cancel Enable project specific settings->OK。

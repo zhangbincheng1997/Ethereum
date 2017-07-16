@@ -27,7 +27,8 @@ public class TransactionGetTest {
 		Web3j web3j = Web3j.build(new HttpService());
 
 		/*
-		 * String name 函数名字 List<Type> inputParameters 入口参数
+		 * String name 函数名字
+		 * List<Type> inputParameters 入口参数
 		 * List<TypeReference<?>> outputParameters 出口参数
 		 */
 		Function function = new Function("get", Arrays.asList(),
@@ -43,14 +44,13 @@ public class TransactionGetTest {
 		 * this is because it does not change the state of any smart contract method’s called,
 		 * it simply returns the value from them.
 		 */
-		EthCall response = web3j
-				.ethCall(Transaction.createEthCallTransaction(Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction),
-						DefaultBlockParameterName.LATEST)
-				.sendAsync().get();
+		EthCall response = web3j.ethCall(
+				Transaction.createEthCallTransaction(null, Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction),
+				DefaultBlockParameterName.LATEST).sendAsync().get();
 
 		// get result
 		List<Type> result = FunctionReturnDecoder.decode(response.getValue(), function.getOutputParameters());
-		int retVal = Integer.parseInt(result.get(0).getValue().toString());
-		System.out.println("retVal = " + retVal);
+		int data = Integer.parseInt(result.get(0).getValue().toString());
+		System.out.println("data = " + data);
 	}
 }

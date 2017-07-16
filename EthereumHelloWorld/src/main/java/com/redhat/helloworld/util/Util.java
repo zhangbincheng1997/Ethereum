@@ -1,7 +1,6 @@
 package com.redhat.helloworld.util;
 
 import java.io.IOException;
-import java.math.BigInteger;
 
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
@@ -9,7 +8,7 @@ import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
 
-import com.redhat.helloworld.sample.HelloWorldContract;
+import com.redhat.helloworld.contract.HelloWorldContract;
 
 /**
  * @author littleredhat
@@ -49,8 +48,8 @@ public class Util {
 		// defaults to http://localhost:8545/
 		Web3j web3j = Web3j.build(new HttpService());
 		// 获取合约
-		HelloWorldContract contract = new HelloWorldContract(contractAddress, web3j, credentials,
-				BigInteger.valueOf(Consts.GAS_PRICE), BigInteger.valueOf(Consts.GAS_LIMIT));
+		HelloWorldContract contract = new HelloWorldContract(contractAddress, web3j, credentials, Consts.GAS_PRICE,
+				Consts.GAS_LIMIT);
 		return contract;
 	}
 }

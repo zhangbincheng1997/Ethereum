@@ -1,4 +1,4 @@
-package com.redhat.helloworld.sample;
+package com.redhat.helloworld.contract;
 
 import java.util.concurrent.Future;
 
@@ -10,19 +10,9 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
  */
 public interface HelloWorldInterface {
 
-	/**
-	 * 获取
-	 * 
-	 * @return
-	 */
+	// 获取
 	public Future<Uint256> get();
 
-	/**
-	 * 设置
-	 * 
-	 * @param x
-	 *            数据
-	 * @return
-	 */
+	// 设置
 	public Future<TransactionReceipt> set(int x);
 }
