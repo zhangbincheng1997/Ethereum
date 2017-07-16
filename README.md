@@ -1,14 +1,14 @@
 # 以太坊开发
 
 ## Geth以太坊客户端
-> * 1、下载地址https://geth.ethereum.org/downloads/ 貌似我打不开的样子？
-> * 2、将创世块文件genesis.json复制到到Geth文件夹下。
-> * 3、第一次启动Geth，需要初始化创世块：
+> * 下载地址https://geth.ethereum.org/downloads/ 貌似我打不开的样子？
+> * 将创世块文件genesis.json复制到到Geth文件夹下。
+> * 第一次启动Geth，需要初始化创世块：
 ```
 geth -datadir "%cd%\chain" init genesis.json
 ```
 
-> * 4、启动Geth，可将命令放在startup.bat脚本，双击脚本启动：
+> * 启动Geth，可将命令放在startup.bat脚本，双击脚本启动：
 ```
 geth --identity "ethnode" --rpc --rpccorsdomain "*" --datadir "%cd%\chain" --port "30303" --rpcapi "db,eth,net,web3" --networkid 666666 console
 
@@ -31,10 +31,10 @@ console
 ```
 
 ## Ethereum Wallet钱包客户端
-> * 1、下载地址https://github.com/ethereum/mist/releases/ 找到对应版本下载。
-> * 2、在Wallets处创建账号，默认首个创建为主账号，挖矿所得的以太币都将进入这个账号，其余为普通账号，可以用来测试。
-> * 3、在Contracts处发布智能合约，输入HelloWorld.sol代码，点击部署。
-4、这个时候看不到部署的智能合约，需要切换到Geth进行挖矿，挖到一定数量的矿之后，智能合约才能确认并且显示出来：
+> * 下载地址https://github.com/ethereum/mist/releases/ 找到对应版本下载。
+> * 在Wallets处创建账号，默认首个创建为主账号，挖矿所得的以太币都将进入这个账号，其余为普通账号，可以用来测试。
+> * 在Contracts处发布智能合约，输入HelloWorld.sol代码，点击部署。
+> * 这个时候看不到部署的智能合约，需要切换到Geth进行挖矿，挖到一定数量的矿之后，智能合约才能确认并且显示出来：
 ```
 miner.start(1)
 # 开启一个线程挖矿，多线程会很卡
@@ -43,7 +43,7 @@ miner.stop()
 ```
 
 ## Web3j 轻量级的以太坊开发库for Java
-> * 1、Maven依赖
+> * Maven依赖
 ```
 <dependency>
 	<groupId>org.web3j</groupId>
@@ -52,7 +52,7 @@ miner.stop()
 </dependency>
 ```
 
-> * 2、代码说明
+> * 代码说明
 ```
 --com.redhat.helloworld.util
 ----Consts.java 常量类 需要修改PASSWORD、PATH和HELLOWORLD_CONTRACT_ADDRESS
@@ -72,7 +72,7 @@ miner.stop()
 ----HelloWorldTest.java HelloWorld合约测试
 ```
 
-> * 3、具体用法
+> * 具体用法
 可以参考项目代码，另外还可以参考Web3j官方文档https://web3j.github.io/web3j/ 内容十分详细。
-> * 4、其他问题
+> * 其他问题
 项目提示JDK Level不是1.8 => Project->Properties->Java Compiler->cancel Enable project specific settings->OK。
