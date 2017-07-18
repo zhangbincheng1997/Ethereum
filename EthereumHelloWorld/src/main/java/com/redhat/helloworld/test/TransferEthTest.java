@@ -15,9 +15,9 @@ import com.redhat.helloworld.util.Consts;
  * @author littleredhat
  */
 public class TransferEthTest {
-	// 对方地址
+	// 瀵规柟鍦板潃
 	private static String toAddress = "0x6c079ade6a7f4c74eebd85c272d2b3930f1224a4";
-	// 金币数量
+	// 杞处鏁伴噺
 	private static double value = 100;
 
 	public static void main(String[] args) throws Exception {

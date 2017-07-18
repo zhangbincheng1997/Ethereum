@@ -54,9 +54,10 @@ miner.stop()
 
 > * 代码说明
 ```
+=> 修改src/main/resources/config.properties里的相关数据
+
 --com.redhat.helloworld.util
-----Consts.java 常量类 需要修改PASSWORD、PATH和HELLOWORLD_CONTRACT_ADDRESS
-----Util.java 工具类
+----Consts.java 常量类
 
 --com.redhat.helloworld.test
 ----ClientVersionTest.java 客户端版本

@@ -27,9 +27,9 @@ public class TransactionGetTest {
 		Web3j web3j = Web3j.build(new HttpService());
 
 		/*
-		 * String name 函数名字
-		 * List<Type> inputParameters 入口参数
-		 * List<TypeReference<?>> outputParameters 出口参数
+		 * String name 鍑芥暟鍚嶅瓧
+		 * List<Type> inputParameters 鍏ュ彛鍙傛暟
+		 * List<TypeReference<?>> outputParameters 鍑哄彛鍙傛暟
 		 */
 		Function function = new Function("get", Arrays.asList(),
 				Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
@@ -41,11 +41,11 @@ public class TransactionGetTest {
 		/*
 		 * eth_call allows you to call a method on a smart contract to query a value.
 		 * There is no transaction cost associated with this function,
-		 * this is because it does not change the state of any smart contract method’s called,
+		 * this is because it does not change the state of any smart contract method锟斤拷s called,
 		 * it simply returns the value from them.
 		 */
 		EthCall response = web3j.ethCall(
-				Transaction.createEthCallTransaction(null, Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction),
+				Transaction.createEthCallTransaction(null, Consts.HELLOWORLD_ADDR, encodedFunction),
 				DefaultBlockParameterName.LATEST).sendAsync().get();
 
 		// get result

@@ -28,17 +28,17 @@ import com.redhat.helloworld.util.Consts;
  * @author littleredhat
  */
 public class FilterTest {
-	// Çø¿éÊıÁ¿
+	// åŒºå—æ•°é‡
 	private static int blockNumber = 0;
-	// ÊÂÎñÊıÁ¿
+	// äº‹åŠ¡æ•°é‡
 	private static int transactionNumber = 0;
 
 	public static void main(String[] args) throws Exception {
-		/***** ¿ªÊ¼¼àÌı *****/
+		/***** åŒºå—ç›‘å¬ *****/
 		BlockFilters();
 		TransactionFilters();
 
-		/***** ¿ªÊ¼ÊÂÎñ *****/
+		/***** äº‹åŠ¡ç›‘å¬ *****/
 		Transaction();
 	}
 
@@ -48,7 +48,7 @@ public class FilterTest {
 		Web3j web3j = Web3j.build(new HttpService());
 
 		web3j.blockObservable(false).subscribe(block -> {
-			System.out.println("ĞÂÇø¿é : " + ++blockNumber);
+			System.out.println("åŒºå—æ•°é‡ : " + ++blockNumber);
 			LocalDateTime timestamp = Instant.ofEpochSecond(block.getBlock().getTimestamp().longValueExact())
 					.atZone(ZoneId.of("UTC")).toLocalDateTime();
 			System.out.println("timestamp : " + timestamp);
@@ -68,7 +68,7 @@ public class FilterTest {
 		Web3j web3j = Web3j.build(new HttpService());
 
 		web3j.transactionObservable().subscribe(tx -> {
-			System.out.println("ĞÂÊÂÎñ : " + ++transactionNumber);
+			System.out.println("äº‹åŠ¡æ•°é‡ : " + ++transactionNumber);
 			System.out.println("getHash: " + tx.getHash());
 			System.out.println("getBlockHash: " + tx.getBlockHash());
 		});
@@ -87,9 +87,9 @@ public class FilterTest {
 		BigInteger nonce = ethGetTransactionCount.getTransactionCount();
 
 		/*
-		 * String name º¯ÊıÃû×Ö
-		 * List<Type> inputParameters Èë¿Ú²ÎÊı
-		 * List<TypeReference<?>> outputParameters ³ö¿Ú²ÎÊı
+		 * String name å‡½æ•°åå­—
+		 * List<Type> inputParameters å…¥å£å‚æ•°
+		 * List<TypeReference<?>> outputParameters å‡ºå£å‚æ•°
 		 */
 		Function function = new Function("set", Arrays.asList(new Uint256(BigInteger.valueOf(10000))),
 				Arrays.<TypeReference<?>>asList());
@@ -98,14 +98,14 @@ public class FilterTest {
 		String encodedFunction = FunctionEncoder.encode(function);
 
 		/*
-		 * BigInteger nonce Ëæ»úÊı×Ö
-		 * BigInteger gasPrice ¼Û¸ñ
-		 * BigInteger gasLimit ÉÏÏŞ
-		 * String to ºÏÔ¼µØÖ·
-		 * String data ±àÂëº¯Êı
+		 * BigInteger nonce éšæœºæ•°
+		 * BigInteger gasPrice gasä»·æ ¼
+		 * BigInteger gasLimit gasä¸Šé™
+		 * String to åˆçº¦åœ°å€
+		 * String data æ•°æ®
 		 */
 		RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, Consts.GAS_PRICE, Consts.GAS_LIMIT,
-				Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction);
+				Consts.HELLOWORLD_ADDR, encodedFunction);
 		// sign our transaction
 		byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
 		String hexValue = Numeric.toHexString(signedMessage);

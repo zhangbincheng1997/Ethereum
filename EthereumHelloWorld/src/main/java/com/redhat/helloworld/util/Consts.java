@@ -1,23 +1,53 @@
 package com.redhat.helloworld.util;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.nio.charset.Charset;
+import java.util.Properties;
 
 /**
  * @author littleredhat
  */
 public class Consts {
-	// Gas¼Û¸ñ
+
+	private static Properties p;
+
+	// è·å–æ•°æ®
+	public static String getData(String key) {
+		if (p == null) {
+			try {
+				p = readProperties();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return p.getProperty(key);
+	}
+
+	// è¯»å–é…ç½®
+	private static Properties readProperties() throws IOException {
+		Properties p = new Properties();
+		InputStream in = Consts.class.getResourceAsStream("/config.properties");
+		InputStreamReader r = new InputStreamReader(in, Charset.forName("UTF-8"));
+		p.load(r);
+		in.close();
+		return p;
+	}
+
+	// Gasä»·æ ¼
 	public static BigInteger GAS_PRICE = BigInteger.valueOf(20_000_000_000L);
-	// GasÉÏÏŞ
+	// Gasä¸Šé™
 	public static BigInteger GAS_LIMIT = BigInteger.valueOf(4_300_000L);
-	// ETHERÒÔÌ«±Ò
+	// ETHERä»¥å¤ªå¸
 	public static BigInteger ETHER = new BigInteger("1000000000000000000");
-	// Ç®°üÃÜÂë
-	public static String PASSWORD = "123456";
-	// Ç®°üÂ·¾¶
-	public static String PATH = "F:\\chain\\geth-win64\\chain\\keystore\\UTC--2017-05-03T17-48-46.721084800Z--6c97ea3f4f71669412aab8b7f705e253ce14064c";
-	// Ç®°üÄ¿Â¼
-	public static String DIRECTORY = "F:\\chain\\geth-win64\\chain\\keystore";
-	// HelloWorldÖÇÄÜºÏÔ¼µØÖ·
-	public static String HELLOWORLD_CONTRACT_ADDRESS = "0x5a4dc569C7B395130c58A9B0C183fEf6c4957AA9";
+	// é’±åŒ…å¯†ç 
+	public static String PASSWORD = getData("password");
+	// é’±åŒ…è·¯å¾„
+	public static String PATH = getData("path");
+	// é’±åŒ…ç›®å½•
+	public static String DIRECTORY = getData("directory");
+	// HelloWorldæ™ºèƒ½åˆçº¦åœ°å€
+	public static String HELLOWORLD_ADDR = "0x5a4dc569C7B395130c58A9B0C183fEf6c4957AA9";
 }

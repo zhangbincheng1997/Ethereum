@@ -10,9 +10,9 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
  */
 public interface HelloWorldInterface {
 
-	// ªÒ»°
+	// get
 	public Future<Uint256> get();
 
-	// …Ë÷√
+	// set
 	public Future<TransactionReceipt> set(int x);
 }

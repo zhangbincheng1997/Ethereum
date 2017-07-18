@@ -38,9 +38,9 @@ public class TransactionSetTest {
 		BigInteger nonce = ethGetTransactionCount.getTransactionCount();
 
 		/*
-		 * String name º¯ÊıÃû×Ö
-		 * List<Type> inputParameters Èë¿Ú²ÎÊı
-		 * List<TypeReference<?>> outputParameters ³ö¿Ú²ÎÊı
+		 * String name å‡½æ•°åå­—
+		 * List<Type> inputParameters å…¥å£å‚æ•°
+		 * List<TypeReference<?>> outputParameters å‡ºå£å‚æ•°
 		 */
 		Function function = new Function("set", Arrays.asList(new Uint256(BigInteger.valueOf(10000))),
 				Arrays.<TypeReference<?>>asList());
@@ -49,14 +49,14 @@ public class TransactionSetTest {
 		String encodedFunction = FunctionEncoder.encode(function);
 
 		/*
-		 * BigInteger nonce Ëæ»úÊı×Ö
-		 * BigInteger gasPrice ¼Û¸ñ
-		 * BigInteger gasLimit ÉÏÏŞ
-		 * String to ºÏÔ¼µØÖ·
-		 * String data ±àÂëº¯Êı
+		 * BigInteger nonce éšæœºæ•°
+		 * BigInteger gasPrice gasä»·æ ¼
+		 * BigInteger gasLimit gasä¸Šé™
+		 * String to åˆçº¦åœ°å€
+		 * String data æ•°æ®
 		 */
 		RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, Consts.GAS_PRICE, Consts.GAS_LIMIT,
-				Consts.HELLOWORLD_CONTRACT_ADDRESS, encodedFunction);
+				Consts.HELLOWORLD_ADDR, encodedFunction);
 
 		// sign our transaction
 		byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);

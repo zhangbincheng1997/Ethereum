@@ -4,10 +4,12 @@ import java.util.concurrent.Future;
 
 import org.web3j.abi.datatypes.generated.Uint256;
 import org.web3j.crypto.Credentials;
+import org.web3j.crypto.WalletUtils;
+import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.protocol.http.HttpService;
 
 import com.redhat.helloworld.util.Consts;
-import com.redhat.helloworld.util.Util;
 
 /**
  * @author littleredhat
@@ -15,13 +17,16 @@ import com.redhat.helloworld.util.Util;
 public class HelloWorldTest {
 
 	public static void main(String[] args) throws Exception {
-		// 获取凭证
-		Credentials credentials = Util.GetCredentials();
-		System.out.println("contractAddress : " + credentials.getAddress());
+		// 鑾峰彇鍑瘉
+		Credentials credentials = WalletUtils.loadCredentials(Consts.PASSWORD, Consts.PATH);
+		System.out.println("getCredentialsAddress : " + credentials.getAddress());
 
-		// 获取合约
-		HelloWorldContract contract = Util.GetHelloWorldContract(credentials, Consts.HELLOWORLD_CONTRACT_ADDRESS);
-		System.out.println("contractAddress : " + contract.getContractAddress());
+		// defaults to http://localhost:8545/
+		Web3j web3j = Web3j.build(new HttpService());
+		// 杩斿洖HelloWorld鍚堢害
+		HelloWorldContract contract = new HelloWorldContract(Consts.HELLOWORLD_ADDR, web3j, credentials,
+				Consts.GAS_PRICE, Consts.GAS_LIMIT);
+		System.out.println("getContractAddress : " + contract.getContractAddress());
 
 		// set
 		Future<TransactionReceipt> transferReceipt = contract.set(10000);

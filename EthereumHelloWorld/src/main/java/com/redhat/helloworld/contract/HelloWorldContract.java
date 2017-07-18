@@ -18,24 +18,27 @@ import org.web3j.tx.Contract;
 public class HelloWorldContract extends Contract implements HelloWorldInterface {
 
 	/**
-	 * HelloWorld合约
+	 * HelloWorld鍚堢害
 	 * 
 	 * @param contractAddress
-	 *            合约地址
+	 *            鍚堢害鍦板潃
 	 * @param web3j
-	 *            JSON-RPC请求
+	 *            JSON-RPC璇锋眰鏈嶅姟宸ュ巶
 	 * @param credentials
-	 *            发起者地址
+	 *            鍑瘉
 	 * @param gasPrice
-	 *            gas价格
+	 *            gas浠锋牸
 	 * @param gasLimit
-	 *            gas上限
+	 *            gas涓婇檺
 	 */
 	public HelloWorldContract(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice,
 			BigInteger gasLimit) {
 		super("", contractAddress, web3j, credentials, gasPrice, gasLimit);
 	}
 
+	/**
+	 * get
+	 */
 	public Future<Uint256> get() {
 		Function function = new Function("get", Arrays.asList(),
 				Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
@@ -43,6 +46,9 @@ public class HelloWorldContract extends Contract implements HelloWorldInterface 
 		return executeCallSingleValueReturnAsync(function);
 	}
 
+	/**
+	 * set
+	 */
 	public Future<TransactionReceipt> set(int x) {
 		Function function = new Function("set", Arrays.asList(new Uint256(BigInteger.valueOf(x))),
 				Arrays.<TypeReference<?>>asList());
