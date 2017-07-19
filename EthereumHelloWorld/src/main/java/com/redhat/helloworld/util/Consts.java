@@ -14,40 +14,32 @@ public class Consts {
 
 	private static Properties p;
 
-	// 获取数据
-	public static String getData(String key) {
-		if (p == null) {
-			try {
-				p = readProperties();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return p.getProperty(key);
-	}
-
-	// 读取配置
-	private static Properties readProperties() throws IOException {
-		Properties p = new Properties();
+	// 初始化配置
+	static {
+		p = new Properties();
 		InputStream in = Consts.class.getResourceAsStream("/config.properties");
 		InputStreamReader r = new InputStreamReader(in, Charset.forName("UTF-8"));
-		p.load(r);
-		in.close();
-		return p;
+		try {
+			p.load(r);
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	// Gas价格
+	// GAS价格
 	public static BigInteger GAS_PRICE = BigInteger.valueOf(20_000_000_000L);
-	// Gas上限
+	// GAS上限
 	public static BigInteger GAS_LIMIT = BigInteger.valueOf(4_300_000L);
 	// ETHER以太币
 	public static BigInteger ETHER = new BigInteger("1000000000000000000");
+
 	// 钱包密码
-	public static String PASSWORD = getData("password");
+	public static String PASSWORD = p.getProperty("password");
 	// 钱包路径
-	public static String PATH = getData("path");
+	public static String PATH = p.getProperty("path");
 	// 钱包目录
-	public static String DIRECTORY = getData("directory");
-	// HelloWorld智能合约地址
-	public static String HELLOWORLD_ADDR = "0x5a4dc569C7B395130c58A9B0C183fEf6c4957AA9";
+	public static String DIRECTORY = p.getProperty("directory");
+	// 合约地址
+	public static String HELLOWORLD_ADDR = p.getProperty("helloworldAddr");
 }

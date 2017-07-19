@@ -14,7 +14,7 @@ import com.redhat.helloworld.util.Consts;
 /**
  * @author littleredhat
  */
-public class HelloWorldTest {
+public class HelloWorldMain {
 
 	public static void main(String[] args) throws Exception {
 		// 获取凭证
@@ -23,7 +23,8 @@ public class HelloWorldTest {
 
 		// defaults to http://localhost:8545/
 		Web3j web3j = Web3j.build(new HttpService());
-		// 返回HelloWorld合约
+
+		// 获取合约
 		HelloWorldContract contract = new HelloWorldContract(Consts.HELLOWORLD_ADDR, web3j, credentials,
 				Consts.GAS_PRICE, Consts.GAS_LIMIT);
 		System.out.println("getContractAddress : " + contract.getContractAddress());

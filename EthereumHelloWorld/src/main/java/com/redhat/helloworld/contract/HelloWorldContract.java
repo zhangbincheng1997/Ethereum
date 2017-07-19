@@ -23,13 +23,13 @@ public class HelloWorldContract extends Contract implements HelloWorldInterface 
 	 * @param contractAddress
 	 *            合约地址
 	 * @param web3j
-	 *            JSON-RPC请求服务工厂
+	 *            RPC请求
 	 * @param credentials
-	 *            凭证
+	 *            钱包凭证
 	 * @param gasPrice
-	 *            gas价格
+	 *            GAS价格
 	 * @param gasLimit
-	 *            gas上限
+	 *            GAS上限
 	 */
 	public HelloWorldContract(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice,
 			BigInteger gasLimit) {

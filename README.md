@@ -70,7 +70,7 @@ miner.stop()
 --com.redhat.helloworld.contract
 ----HelloWorldInterface.java HelloWorld合约接口
 ----HelloWorldContract.java HelloWorld合约实现 继承Web3j提供的Contract类
-----HelloWorldTest.java HelloWorld合约测试
+----HelloWorldMain.java HelloWorld合约测试
 ```
 
 > * 具体用法
