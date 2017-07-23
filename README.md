@@ -5,7 +5,7 @@
 > * 将创世块文件genesis.json复制到到Geth文件夹下。
 > * 第一次启动Geth，需要初始化创世块：
 ```
-geth init genesis.json
+geth init genesis.json --datadir "%cd%\chain"
 ```
 
 > * 启动Geth，可将命令放在startup.bat脚本，双击脚本启动：
