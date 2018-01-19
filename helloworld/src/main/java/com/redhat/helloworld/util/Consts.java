@@ -12,34 +12,34 @@ import java.util.Properties;
  */
 public class Consts {
 
-	private static Properties p;
+    private static Properties p;
 
-	// 初始化配置
-	static {
-		p = new Properties();
-		InputStream in = Consts.class.getResourceAsStream("/config.properties");
-		InputStreamReader r = new InputStreamReader(in, Charset.forName("UTF-8"));
-		try {
-			p.load(r);
-			in.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    // 初始化配置
+    static {
+        p = new Properties();
+        InputStream in = Consts.class.getResourceAsStream("/config.properties");
+        InputStreamReader r = new InputStreamReader(in, Charset.forName("UTF-8"));
+        try {
+            p.load(r);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	// GAS价格
-	public static BigInteger GAS_PRICE = BigInteger.valueOf(20_000_000_000L);
-	// GAS上限
-	public static BigInteger GAS_LIMIT = BigInteger.valueOf(4_300_000L);
-	// ETHER以太币
-	public static BigInteger ETHER = new BigInteger("1000000000000000000");
+    // GAS价格
+    public static BigInteger GAS_PRICE = BigInteger.valueOf(20_000_000_000L);
+    // GAS上限
+    public static BigInteger GAS_LIMIT = BigInteger.valueOf(4_300_000L);
+    // ETHER:WEI比例
+    public static BigInteger ETHER = new BigInteger("1000000000000000000");
 
-	// 钱包密码
-	public static String PASSWORD = p.getProperty("password");
-	// 钱包路径
-	public static String PATH = p.getProperty("path");
-	// 钱包目录
-	public static String DIRECTORY = p.getProperty("directory");
-	// 合约地址
-	public static String HELLOWORLD_ADDR = p.getProperty("helloworldAddr");
+    // 钱包密码
+    public static String PASSWORD = p.getProperty("password");
+    // 钱包路径
+    public static String PATH = p.getProperty("path");
+    // 钱包目录
+    public static String DIRECTORY = p.getProperty("directory");
+    // 合约地址
+    public static String HELLOWORLD_ADDR = p.getProperty("helloworldAddr");
 }

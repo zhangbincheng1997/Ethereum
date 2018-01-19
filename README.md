@@ -1,79 +1,122 @@
 # 以太坊开发
 
-## Geth以太坊客户端
-> * 下载地址https://geth.ethereum.org/downloads/ 貌似我打不开的样子？
-> * 将创世块文件genesis.json复制到到Geth文件夹下。
-> * 第一次启动Geth，需要初始化创世块：
+## 通过 PPA 安装以太坊
 ```
-geth init genesis.json --datadir "%cd%\chain"
-```
-
-> * 启动Geth，可将命令放在startup.bat脚本，双击脚本启动：
-```
-geth --identity "ethnode" --rpc --rpccorsdomain "*" --datadir "%cd%\chain" --port "30303" --rpcapi "db,eth,net,web3" --networkid 666666 console
-
-identity
-# 区块链标识
-rpc
-# rpc启动通信
-rpccorsdomain
-# rpc跨源请求
-datadir
-# 区块链数据位置
-port
-# 监听端口
-rpcapi
-# 允许接口
-networkid
-# 区块链ID
-console
-# 命令行模式
+sudo apt-get install software-properties-common
+sudo add-apt-repository -y ppa:ethereum/ethereum
+sudo add-apt-repository -y ppa:ethereum/ethereum-dev
+sudo apt-get update
+sudo apt-get install ethereum
 ```
 
-## Ethereum Wallet钱包客户端
-> * 下载地址https://github.com/ethereum/mist/releases/ 找到对应版本下载。
-> * 在Wallets处创建账号，默认首个创建为主账号，挖矿所得的以太币都将进入这个账号，其余为普通账号，可以用来测试。
-> * 在Contracts处发布智能合约，输入HelloWorld.sol代码，点击部署。
-> * 这个时候看不到部署的智能合约，需要切换到Geth进行挖矿，挖到一定数量的矿之后，智能合约才能确认并且显示出来：
+## 通过源码安装以太坊
 ```
-miner.start(1)
-# 开启一个线程挖矿，多线程会很卡
+git clone https://github.com/ethereum/go-ethereum
+cd go-ethereum
+make geth
+cd build/bin
+ln -s geth /usr/bin/geth
+```
+
+## 初始化以太坊
+1. 创建工作目录 ethereum
+2. 将 genesis.json 创世块文件放入工作目录
+2. 执行 geth init genesis.json
+```
+自动生成 ~/.ethereum
+.
+├── geth
+│   ├── chaindata
+│   │   ├── 000001.log
+│   │   ├── CURRENT
+│   │   ├── LOCK
+│   │   ├── LOG
+│   │   └── MANIFEST-000000
+│   ├── lightchaindata
+│   │   ├── 000001.ldb
+│   │   ├── CURRENT
+│   │   ├── LOCK
+│   │   ├── LOG
+│   │   └── MANIFEST-000000
+└── keystore
+```
+
+## 启动以太坊
+1. 将 startup.sh 启动脚本放入工作目录
+2. 执行 ./start.sh
+```
+geth --rpc --rpcapi personal,db,eth,net,web3 --networkid 2018 console
+help:
+--rpc Enable the HTTP-RPC server
+--rpcapi API's offered over the HTTP-RPC interface
+--networkid 区块链ID-私链
+--console 命令行模式
+```
+2. 开始挖矿
+```
+miner.start(1) 一个线程挖矿，多线程会很卡
+```
+3. 停止挖矿
+```
 miner.stop()
-# 关闭挖矿命令
 ```
+
+## 以太坊钱包
+1. 下载地址 https://github.com/ethereum/mist/releases/ 找到对应版本下载。
+```
+dpkg方式安装:
+sudo dpkg -i Ethereum-Wallet-linux64-0-9-3.deb
+```
+2. Wallets 创建账号，默认首个创建为主账号，挖矿所得的以太币都将进入这个账号，其余为普通账号，可以用来测试。
+![alt text](docs/1.png "title")
+3. Contracts 发布智能合约，输入 HelloWorld.sol 代码，点击部署。
+![alt text](docs/2.png "title")
+4. 等待挖矿，智能合约才能确认并且显示出来：
+![alt text](docs/3.png "title")
+
+## 在线测试智能合约
+1. 智能合约 Solidity 运行在以太坊上的去中心化合约
+2. 中文文档 http://www.tryblockchain.org/
+3. 英文文档 https://solidity.readthedocs.io/
+4. 在线测试 https://remix.ethereum.org/
+![alt text](docs/4.png "title")
 
 ## Web3j 轻量级的以太坊开发库for Java
-> * Maven依赖
+1. 依赖说明
 ```
 <dependency>
 	<groupId>org.web3j</groupId>
 	<artifactId>core</artifactId>
-	<version>2.2.2</version>
+	<version>3.2.0</version>
 </dependency>
 ```
-
-> * 代码说明
+2. 代码说明
 ```
 => 修改src/main/resources/config.properties里的相关数据
-
---com.redhat.helloworld.util
+help:
+--com.redhat.helloworld.util 工具包
 ----Consts.java 常量类
-
---com.redhat.helloworld.test
+--com.redhat.helloworld.test 简单测试
 ----ClientVersionTest.java 客户端版本
 ----GenerateWalletTest.java 生成钱包
 ----TransferEthTest.java 转账
 ----TransactionGetTest.java Web3j原生调用HelloWorld合约的get方法
 ----TransactionSetTest.java Web3j原生调用HelloWorld合约的set方法
 ----FilterTest.java 过滤器
-
---com.redhat.helloworld.contract
+--com.redhat.helloworld.contract 通用框架
 ----HelloWorldInterface.java HelloWorld合约接口
 ----HelloWorldContract.java HelloWorld合约实现 继承Web3j提供的Contract类
 ----HelloWorldMain.java HelloWorld合约测试
 ```
+3. 具体用法
+	1. 官方文档 https://web3j.github.io/web3j/
+	2. 官方demo1 https://github.com/web3j/sample-project-gradle
+	3. 官方demo2 https://github.com/conor10/web3j-javamag
 
-> * 具体用法
-可以参考项目代码，另外还可以参考Web3j官方文档https://web3j.github.io/web3j/ 内容十分详细。
-> * 其他问题
-项目提示JDK Level不是1.8 => Project->Properties->Java Compiler->cancel Enable project specific settings->OK。
+## 其他问题
+1. Usage of API documented as @since 1.8+  
+设置如下
+![alt text](docs/5.png "title")
+2. Error:java: Compilation failed: internal java compiler error  
+设置如下
+![alt text](docs/6.png "title")
