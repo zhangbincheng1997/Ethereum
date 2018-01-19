@@ -1,10 +1,9 @@
-package test;
+package com.redhat.helloworld.test;
 
 import com.redhat.helloworld.util.Consts;
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Type;
 import org.web3j.abi.datatypes.generated.Uint256;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.RawTransaction;
@@ -18,15 +17,62 @@ import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Numeric;
 
 import java.math.BigInteger;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * @author littleredhat
  */
-public class TransactionSetTest {
+public class FilterTest {
+    // 区块数量
+    private static int blockNumber = 0;
+    // 事务数量
+    private static int transactionNumber = 0;
 
     public static void main(String[] args) throws Exception {
+        /***** 区块监听 *****/
+        BlockFilters();
+        TransactionFilters();
+
+        /***** 事务监听 *****/
+        Transaction();
+    }
+
+    // To receive all new blocks as they are added to the blockchain
+    private static void BlockFilters() {
+        // defaults to http://localhost:8545/
+        Web3j web3j = Web3j.build(new HttpService());
+
+        web3j.blockObservable(false).subscribe(block -> {
+            System.out.println("区块数量 : " + ++blockNumber);
+            LocalDateTime timestamp = Instant.ofEpochSecond(block.getBlock().getTimestamp().longValueExact())
+                    .atZone(ZoneId.of("UTC")).toLocalDateTime();
+            System.out.println("timestamp : " + timestamp);
+            System.out.println("hash : " + block.getBlock().getHash());
+            System.out.println("getParentHash : " + block.getBlock().getParentHash());
+            int count = block.getBlock().getTransactions().size();
+            for (int i = 0; i < count; i++) {
+                Object tx = block.getBlock().getTransactions().get(i).get();
+                System.out.println("[ " + i + " ]" + " getTransaction : " + tx);
+            }
+        });
+    }
+
+    // To receive all new transactions as they are added to the blockchain
+    private static void TransactionFilters() {
+        // defaults to http://localhost:8545/
+        Web3j web3j = Web3j.build(new HttpService());
+
+        web3j.transactionObservable().subscribe(tx -> {
+            System.out.println("事务数量 : " + ++transactionNumber);
+            System.out.println("getHash: " + tx.getHash());
+            System.out.println("getBlockHash: " + tx.getBlockHash());
+        });
+    }
+
+    private static void Transaction() throws Exception {
         // defaults to http://localhost:8545/
         Web3j web3j = Web3j.build(new HttpService());
 
@@ -43,8 +89,8 @@ public class TransactionSetTest {
          * List<Type> inputParameters 入口参数
          * List<TypeReference<?>> outputParameters 出口参数
          */
-        Function function = new Function("set", Arrays.<Type>asList(new Uint256(BigInteger.valueOf(10000))),
-                Collections.<TypeReference<?>>emptyList());
+        Function function = new Function("set", Arrays.asList(new Uint256(BigInteger.valueOf(10000))),
+                Arrays.<TypeReference<?>>asList());
 
         // encode the function
         String encodedFunction = FunctionEncoder.encode(function);

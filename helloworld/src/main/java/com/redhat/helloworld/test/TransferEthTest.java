@@ -1,4 +1,4 @@
-package test;
+package com.redhat.helloworld.test;
 
 import com.redhat.helloworld.util.Consts;
 import org.web3j.crypto.Credentials;
@@ -27,8 +27,7 @@ public class TransferEthTest {
         // To send Ether to another party using your Ethereum wallet file
         Credentials credentials = WalletUtils.loadCredentials(Consts.PASSWORD, Consts.PATH);
 
-        // Web3j web3j, Credentials credentials, String toAddress, BigDecimal
-        // value, Convert.Unit unit
+        // Web3j web3j, Credentials credentials, String toAddress, BigDecimal value, Convert.Unit unit
         TransactionReceipt transactionReceipt = Transfer.sendFunds(web3, credentials, toAddress,
                 BigDecimal.valueOf(value), Convert.Unit.ETHER).send();
         System.out.println(transactionReceipt.getTransactionHash());

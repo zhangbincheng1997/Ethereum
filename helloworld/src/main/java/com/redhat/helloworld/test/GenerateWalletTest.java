@@ -1,4 +1,4 @@
-package test;
+package com.redhat.helloworld.test;
 
 import com.redhat.helloworld.util.Consts;
 import org.web3j.crypto.WalletUtils;

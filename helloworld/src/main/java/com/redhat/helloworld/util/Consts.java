@@ -31,8 +31,6 @@ public class Consts {
     public static BigInteger GAS_PRICE = BigInteger.valueOf(20_000_000_000L);
     // GAS上限
     public static BigInteger GAS_LIMIT = BigInteger.valueOf(4_300_000L);
-    // ETHER:WEI比例
-    public static BigInteger ETHER = new BigInteger("1000000000000000000");
 
     // 钱包密码
     public static String PASSWORD = p.getProperty("password");

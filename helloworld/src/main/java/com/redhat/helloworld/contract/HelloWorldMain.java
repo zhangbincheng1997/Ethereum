@@ -1,13 +1,13 @@
-package contract;
+package com.redhat.helloworld.contract;
 
 import com.redhat.helloworld.util.Consts;
+import org.web3j.abi.datatypes.generated.Uint256;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
 
-import java.math.BigInteger;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -34,8 +34,8 @@ public class HelloWorldMain {
         System.out.println("set : " + transferReceipt.get().getTransactionHash()); // 这里的 get 会等待
 
         // get
-        CompletableFuture<BigInteger> result = contract.get().sendAsync(); // 注意是异步请求
+        CompletableFuture<Uint256> result = contract.get().sendAsync(); // 注意是异步请求
         System.out.println("waiting..."); // 请求完马上返回
-        System.out.println("get : " + result.get().intValue()); // 这里的 get 会等待
+        System.out.println("get : " + result.get().getValue().intValue()); // 这里的 get 会等待
     }
 }

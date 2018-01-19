@@ -1,4 +1,4 @@
-package contract;
+package com.redhat.helloworld.contract;
 
 import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.Function;
@@ -35,11 +35,11 @@ public class HelloWorldContract extends Contract implements HelloWorldInterface 
     /**
      * get
      */
-    public RemoteCall<BigInteger> get() {
+    public RemoteCall<Uint256> get() {
         Function function = new Function("get", Arrays.<Type>asList(),
                 Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
                 }));
-        return executeRemoteCallSingleValueReturn(function, BigInteger.class);
+        return executeRemoteCallSingleValueReturn(function);
     }
 
     /**

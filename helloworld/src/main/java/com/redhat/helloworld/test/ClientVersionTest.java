@@ -1,4 +1,4 @@
-package test;
+package com.redhat.helloworld.test;
 
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
