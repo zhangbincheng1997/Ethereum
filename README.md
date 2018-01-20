@@ -1,16 +1,26 @@
 # 以太坊开发
 
 ## 安装以太坊
-1. 通过 ppa 安装
+1. 通过 ppa 安装(推荐)
 ```
 sudo apt-get install software-properties-common
 sudo add-apt-repository -y ppa:ethereum/ethereum
 sudo apt-get update
 sudo apt-get install ethereum
-error:
-提示 gpg: no valid OpenPGP data found:
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys XXXXXXXXXXXXXXXX(例如: 1C52189C923F6CA9)
 ```
+  1. error1: gpg: no valid OpenPGP data found:  
+  ```
+  # 找不到有效的公钥
+	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys XXXXXXXXXXXXXXXX(例如: 1C52189C923F6CA9)
+  ```
+  2. error2 E: 无法下载 http://cn.archive.ubuntu.com/ubuntu/pool/universe/s/swarm-cluster/swarm_2.1.8-2_amd64.deb  404  Not Found [IP: 2001:67c:1562::16 80]
+  ```
+	# 找不到有效的镜像
+	sudo vim /etc/apt/sources.list
+	添加两行
+	deb http://ppa.launchpad.net/ethereum/ethereum/ubuntu artful main
+	deb-src http://ppa.launchpad.net/ethereum/ethereum/ubuntu artful main
+  ```
 2. 通过 source 安装
 ```
 git clone https://github.com/ethereum/go-ethereum
@@ -92,21 +102,22 @@ sudo dpkg -i Ethereum-Wallet-linux64-0-9-3.deb
 1. 依赖
 ```
 <dependencies>
-		<dependency>
-				<groupId>org.web3j</groupId>
-				<artifactId>core</artifactId>
-				<version>3.2.0</version>
-		</dependency>
-		<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.7.25</version>
-		</dependency>
+  <dependency>
+    <groupId>org.web3j</groupId>
+    <artifactId>core</artifactId>
+    <version>3.2.0</version>
+  </dependency>
+  <dependency>
+    <groupId>org.slf4j</groupId>
+		<artifactId>slf4j-log4j12</artifactId>
+		<version>1.7.25</version>
+	</dependency>
 </dependencies>
 ```
 2. 结构
 ```
-=> 修改src/main/resources/config.properties里的相关数据
+note:
+src/main/resources/config.properties 配置文件
 help:
 --com.redhat.helloworld.util 工具包
 ----Consts.java 常量类
@@ -158,7 +169,7 @@ public class HelloWorldContract extends Contract implements HelloWorldInterface 
 3. 以上错误可以通过 Maven 设置编译器级别解决
 ```
 <properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+  <maven.compiler.source>1.8</maven.compiler.source>
+  <maven.compiler.target>1.8</maven.compiler.target>
 </properties>
 ```
