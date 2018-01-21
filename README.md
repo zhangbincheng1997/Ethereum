@@ -69,34 +69,65 @@ help:
 --networkid 区块链ID-私链
 --console 命令行模式
 ```
-2. 开始挖矿
+3. 命令行创建钱包
+```
+# 查询用户
+eth.accounts
+# 创建用户
+personal.newAccount("password")
+# 查询余额
+eth.getBalance(eth.accounts[0])
+```
+4. 图形化创建钱包  
+```
+# 下载地址 https://github.com/ethereum/mist/releases/
+sudo dpkg -i Ethereum-Wallet-linux64-0-9-3.deb
+```
+![alt text](docs/1.png "title")
+5. 开始挖矿
 ```
 miner.start(1) # 一个线程挖矿，多线程会很卡
 ```
-3. 停止挖矿
+6. 停止挖矿
 ```
 miner.stop()
 ```
 
-## 以太坊钱包
-1. 下载地址 https://github.com/ethereum/mist/releases/
-```
-dpkg方式安装:
-sudo dpkg -i Ethereum-Wallet-linux64-0-9-3.deb
-```
-2. WALLETS-ADD ACCOUNT 创建钱包账号（默认 ～/.ethereum/keystore 目录）
-![alt text](docs/1.png "title")
-3. Contracts-DEPLOY NEW CONTRACT 发布智能合约（输入 HelloWorld.sol 代码）
+## 部署智能合约
+1. wallet
 ![alt text](docs/2.png "title")
-4. 等待挖矿，智能合约确认并显示：
 ![alt text](docs/3.png "title")
-
-## 在线测试智能合约
-1. 智能合约 Solidity 运行在以太坊上的去中心化合约
-2. 中文文档 http://www.tryblockchain.org/
-3. 英文文档 https://solidity.readthedocs.io/
-4. 在线测试 https://remix.ethereum.org/
+2. geth
 ![alt text](docs/4.png "title")
+![alt text](docs/5.png "title")
+```
+# 解锁用户
+personal.unlockAccount(eth.account[0])
+# 复制 https://remix.ethereum.org/ Compile - Details - WEB3DEPLOY 到 geth
+var helloworldContract = web3.eth.contract(......);
+var helloworld = helloworldContract.new(......)
+```
+3. web3j
+``` com.redhat.helloworld.contract
+/**
+ * 部署合约
+ *
+ * @param web3j       RPC请求
+ * @param credentials 钱包凭证
+ * @param gasPrice    GAS价格
+ * @param gasLimit    GAS上限
+ * @return
+ */
+public static RemoteCall<HelloWorldContract> deploy(Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+    // 构造函数参数 NULL
+    String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList());
+    return deployRemoteCall(HelloWorldContract.class, web3j, credentials, gasPrice, gasLimit, BINARY, encodedConstructor);
+}
+```
+> 参考链接
+  1. 中文文档 http://www.tryblockchain.org/
+  2. 英文文档 https://solidity.readthedocs.io/
+  3. 在线测试 https://remix.ethereum.org/
 
 ## Web3j 轻量级的以太坊开发库for Java
 1. 依赖
@@ -134,11 +165,7 @@ help:
 ----HelloWorldMain.java HelloWorld 合约测试
 ```
 
-## 具体用法
-1. 官方文档 https://web3j.github.io/web3j/
-2. 官方demo1 https://github.com/web3j/sample-project-gradle
-3. 官方demo2 https://github.com/conor10/web3j-javamag
-4. 最佳实践
+## 最佳实践
 ```
 继承 Web3j 提供的 Contract 类，里面封装了许多函数:
 // 请求返回值为单个的函数
@@ -158,14 +185,18 @@ public class HelloWorldContract extends Contract implements HelloWorldInterface 
 ......
 }
 ```
+> 参考链接
+  1. 官方文档 https://web3j.github.io/web3j/
+  2. 官方demo1 https://github.com/web3j/sample-project-gradle
+  3. 官方demo2 https://github.com/conor10/web3j-javamag
 
 ## 错误信息
 1. Usage of API documented as @since 1.8+  
 解决方法设置如下:
-![alt text](docs/5.png "title")
+![alt text](docs/6.png "title")
 2. Error:java: Compilation failed: internal java compiler error  
 解决方法设置如下:
-![alt text](docs/6.png "title")
+![alt text](docs/7.png "title")
 3. 以上错误可以通过 Maven 设置编译器级别解决
 ```
 <properties>
