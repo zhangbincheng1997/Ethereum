@@ -21,6 +21,7 @@ $ sudo vim /etc/apt/sources.list
 deb http://ppa.launchpad.net/ethereum/ethereum/ubuntu artful main
 deb-src http://ppa.launchpad.net/ethereum/ethereum/ubuntu artful main
 ```
+
 2. 通过 source 安装
 ```
 $ git clone https://github.com/ethereum/go-ethereum
@@ -29,6 +30,7 @@ $ cd go-ethereum
 $ make geth
 $ ln -s build/bin/geth /usr/bin/geth # 软链接
 ```
+
 3. 更多安装方式请看
 ```
 https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum
@@ -88,6 +90,7 @@ $ ./startup.sh
 # 查询余额
 > eth.getBalance(eth.accounts[0])
 ```
+
 2. 方式二 - 图形化创建钱包 (下载地址 https://github.com/ethereum/mist/releases/)
 ```
 # 手动安装
@@ -106,12 +109,15 @@ $ ./startup.sh
 ```
 
 ## 部署智能合约
-1. 方式一 - 通过 wallet  
-复制 crowdfunding.sol 代码, 选择 "Select Contract to Deploy" 中的 HelloWorld, 点击 DEPLOY 按钮
+1. 方式一 - 通过 wallet
+
+复制 HelloWorld.sol 代码, 选择 "Select Contract to Deploy" 中的 HelloWorld, 点击 DEPLOY 按钮
 ![alt text](docs/2.png "title")
 查看 Contracts 信息
 ![alt text](docs/3.png "title")
-2. 方式二 - 通过 geth  
+
+2. 方式二 - 通过 geth
+
 在线测试 https://remix.ethereum.org/
 ![alt text](docs/4.png "title")
 编译合约 Compile -> Details -> WEB3DEPLOY
@@ -126,6 +132,7 @@ $ ./startup.sh
 var helloworld = helloworldContract.new(......)
 控制台输出: INFO [MM-dd|HH:mm:ss] Submitted contract creation              fullhash=0x...... contract=0x......
 ```
+
 3. 方式三 - 通过 web3j
 ```
 // 参考 CrowdFundingContract.java
@@ -137,14 +144,16 @@ public static RemoteCall<HelloWorldContract> deploy(Web3j web3j, Credentials cre
 // 参考 CrowdFundingMain.java
 System.out.println("[ContractAddress] " + contract.getContractAddress());
 ```
+
 4. 记得挖矿
+
 > 参考链接
   1. 中文文档 http://www.tryblockchain.org/
   2. 英文文档 https://solidity.readthedocs.io/
   3. 在线测试 https://remix.ethereum.org/
 
 ## Web3j 轻量级的以太坊开发库 for Java
-1. 依赖
+1. 项目依赖
 ```
 <dependencies>
 	<dependency>
@@ -159,7 +168,8 @@ System.out.println("[ContractAddress] " + contract.getContractAddress());
 	</dependency>
 </dependencies>
 ```
-2. 结构
+
+2. 项目结构
 ```
 note:
 src/main/resources/config.properties 配置文件
