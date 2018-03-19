@@ -135,13 +135,13 @@ var helloworld = helloworldContract.new(......)
 
 3. 方式三 - 通过 web3j
 ```
-// 参考 CrowdFundingContract.java
+// 参考文件 HelloWorldContract.java
 public static RemoteCall<HelloWorldContract> deploy(Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
     // 构造函数参数 NULL
     String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList());
     return deployRemoteCall(HelloWorldContract.class, web3j, credentials, gasPrice, gasLimit, BINARY, encodedConstructor);
 }
-// 参考 CrowdFundingMain.java
+// 参考文件 HelloWorldMain.java
 System.out.println("[ContractAddress] " + contract.getContractAddress());
 ```
 
@@ -204,7 +204,7 @@ protected RemoteCall<List<Type>> executeRemoteCallMultipleValueReturn(Function f
 protected RemoteCall<TransactionReceipt> executeRemoteCallTransaction(Function function) {
 	return new RemoteCall<>(() -> executeTransaction(function));
 }
-用法请看com.redhat.helloworld.contract.HelloWorldContract.java:
+用法请看 com.redhat.helloworld.contract.HelloWorldContract.java:
 public class HelloWorldContract extends Contract implements HelloWorldInterface {
 ......
 }
