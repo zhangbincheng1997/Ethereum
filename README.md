@@ -128,13 +128,13 @@ console: INFO [MM-dd|HH:mm:ss] Submitted contract creation              fu
 resources/HelloWorld.sol ----> org.web3j.model.HelloWorld
 ```
 
-5. 部署合约：test/java/com/example/demo/HelloWorldDeploy.java
+5. 部署合约：main/java/com/example/demo/HelloWorldDeploy.java
 ```
-HelloWorldDeploy contract = HelloWorldDeploy.deploy(web3j, credentials, new DefaultGasProvider()).send();
-System.out.println(contract.getContractAddress());
+HelloWorld contract = HelloWorld.deploy(web3j, credentials, new DefaultGasProvider()).send();
+System.out.println("getContractAddress : " + contract.getContractAddress());
 ```
 
-6. 加载合约：test/java/com/example/demo/HelloWorldMain.java
+6. 加载合约：main/java/com/example/demo/HelloWorldMain.java
 ```
 HelloWorld contract = HelloWorld.load(Constants.ADDRESS, web3j, credentials, new DefaultGasProvider());
 System.out.println("getContractAddress : " + contract.getContractAddress());
