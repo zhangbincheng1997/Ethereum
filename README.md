@@ -1,5 +1,5 @@
 # 以太坊开发 HelloWorld for Java
-:smile: 更新版本，使用插件。
+:smile: 更新版本，支持插件。
 
 ## Geth下载
 1. 官方下载：
@@ -83,8 +83,6 @@ geth --rpc --rpcaddr "0.0.0.0" --rpcport 8545 --rpccorsdomain "*" --rpcapi "pers
 ## 部署合约
 1. 方式一 - remix编译 + geth部署
 
-Compile -> Details -> WEB3DEPLOY
-
 ![alt text](docs/1.png)
 
 ```
@@ -127,7 +125,7 @@ console: INFO [MM-dd|HH:mm:ss] Submitted contract creation              fu
 
 4. 运行插件：Plugins->web3j:generate-sources
 ```
-resources/HelloWorld.sol <====> org.web3j.model.HelloWorld
+resources/HelloWorld.sol ----> org.web3j.model.HelloWorld
 ```
 
 5. 部署合约：test/java/com/example/demo/HelloWorldDeploy.java
@@ -145,16 +143,18 @@ System.out.println("getContractAddress : " + contract.getContractAddress());
 7. 项目结构
 ```
 --com.example.demo.util
-----Constants.java 常量类
+----Constants.java 常量
+
 --com.example.demo.test
 ----ClientVersionTest.java 版本
 ----TransferEthTest.java 转账
 ----TransactionGetTest.java Web3j 原生调用合约的 get 方法
 ----TransactionSetTest.java Web3j 原生调用合约的 set 方法
 ----FilterTest.java 过滤器
+
 --com.example.demo.contract
-----HelloWorldDeploy.java 合约部署
-----HelloWorldMain.java 合约加载
+----HelloWorldDeploy.java 部署合约
+----HelloWorldMain.java 加载合约
 ```
 
 ## Maven镜像
@@ -175,3 +175,16 @@ C:\\Users\\zhang\\.m2\\settings.xml
     </mirror>
 </mirrors>
 ```
+
+## 错误信息
+Usage of API documented as @since 1.8+
+
+解决方法设置如下：
+
+![alt text](docs/3.png)
+
+Error:java: Compilation failed: internal java compiler error
+
+解决方法设置如下：
+
+![alt text](docs/4.png)
