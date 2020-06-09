@@ -31,7 +31,7 @@ public class HelloWorldMain {
         // get
         BigInteger result = contract.get().send();
         System.out.println("waiting..."); // 阻塞
-        System.out.println("get : " + result);
+        System.out.println("get : " + result); // 10000
 
         //***** 异步请求方式 *****
         // set
@@ -42,6 +42,6 @@ public class HelloWorldMain {
         // get
         CompletableFuture<BigInteger> future = contract.get().sendAsync();
         System.out.println("waiting..."); // 非阻塞
-        System.out.println("get : " + future.get());
+        System.out.println("get : " + future.get()); // 10000
     }
 }

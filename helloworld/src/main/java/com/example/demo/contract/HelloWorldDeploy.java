@@ -19,7 +19,6 @@ public class HelloWorldDeploy {
         // 部署合约
         HelloWorld contract = HelloWorld.deploy(web3j, credentials, new DefaultGasProvider()).send();
         System.out.println("getContractAddress : " + contract.getContractAddress());
-
         // rewrite: contractAddress ----> application.properties
     }
 }

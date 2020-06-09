@@ -106,7 +106,7 @@ console: INFO [MM-dd|HH:mm:ss] Submitted contract creation              fu
 	<dependency>
 		<groupId>org.web3j</groupId>
 		<artifactId>core</artifactId>
-		<version>3.2.0</version>
+		<version>4.5.11</version>
 	</dependency>
 </dependencies>
 ```
@@ -132,6 +132,7 @@ resources/HelloWorld.sol ----> org.web3j.model.HelloWorld
 ```
 HelloWorld contract = HelloWorld.deploy(web3j, credentials, new DefaultGasProvider()).send();
 System.out.println("getContractAddress : " + contract.getContractAddress());
+// rewrite: contractAddress ----> application.properties
 ```
 
 6. 加载合约：main/java/com/example/demo/HelloWorldMain.java
